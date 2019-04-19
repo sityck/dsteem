@@ -530,6 +530,21 @@ OperationSerializers.witness_set_properties = OperationDataSerializer(42, [
     ['extensions', ArraySerializer(VoidSerializer)],
 ])
 
+OperationSerializers.paper_vote = OperationDataSerializer(56, [
+    ['voter', StringSerializer],
+    ['author', StringSerializer],
+    ['permlink', StringSerializer],
+    ['count', Int16Serializer],
+])
+
+OperationSerializers.claim_paper = OperationDataSerializer(57, [
+    ['claimer', StringSerializer],
+    ['author', StringSerializer],
+    ['permlink', StringSerializer],
+    ['parent_author', StringSerializer],
+    ['parent_permlink', StringSerializer],
+])
+
 const OperationSerializer = (buffer: ByteBuffer, operation: Operation) => {
     const serializer = OperationSerializers[operation[0]]
     if (!serializer) {

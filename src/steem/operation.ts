@@ -87,6 +87,8 @@ export type OperationName = // <id>
     | 'withdraw_vesting' // 4
     | 'witness_set_properties' // 42
     | 'witness_update' // 11
+    | 'paper_vote' //56
+    | 'claim_paper' //57
 
 /**
  * Virtual operation name.
@@ -882,5 +884,28 @@ export interface WitnessSetPropertiesOperation extends Operation {
         owner: string
         props: Array<[string, Buffer]>
         extensions: any[]
+    }
+}
+
+export interface PaperVoteOperation extends Operation {
+    0: 'paper_vote' // 56
+    1: {
+        voter: string // account_name_type
+        author: string // account_name_type
+        permlink: string
+
+        count: number // int16_t
+    }
+}
+
+export interface ClaimPaperOperation extends Operation {
+    0: 'claim_paper' // 57
+    1: {
+        claimer: string // account_name_type
+        author: string // account_name_type
+        permlink: string
+
+        parent_author: string // account_name_type
+        parent_permlink: string
     }
 }

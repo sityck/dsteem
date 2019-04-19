@@ -53,6 +53,8 @@ import {
     Operation,
     TransferOperation,
     VoteOperation,
+    PaperVoteOperation,
+    ClaimPaperOperation,
 } from './../steem/operation'
 import {SignedTransaction, Transaction, TransactionConfirmation} from './../steem/transaction'
 
@@ -318,6 +320,16 @@ export class BroadcastAPI {
      */
     public call(method: string, params?: any[]) {
         return this.client.call('condenser_api', method, params)
+    }
+
+    public async papervote(data: PaperVoteOperation[1], key: PrivateKey) {
+        const op: Operation = ['paper_vote', data]
+        return this.sendOperations([op], key)
+    }
+
+    public async claimpaper(data: ClaimPaperOperation[1], key: PrivateKey) {
+        const op: Operation = ['claim_paper', data]
+        return this.sendOperations([op], key)
     }
 
 }
