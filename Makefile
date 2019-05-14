@@ -26,7 +26,7 @@ dist/dsteem.js: src/index-browser.ts
 
 dist/dsteem.d.ts: $(SRC_FILES) node_modules
 	dts-generator --name dsteem --project . --out dist/dsteem.d.ts
-	sed -e "s$@'dsteem/index'$@'dsteem'$@g" -i '' dist/dsteem.d.ts
+	sed -i "s/'dsteem\/index'/'dsteem'/g" dist/dsteem.d.ts
 
 dist/%.gz: dist/dsteem.js
 	gzip -9 -f -c $(basename $@) > $(basename $@).gz
